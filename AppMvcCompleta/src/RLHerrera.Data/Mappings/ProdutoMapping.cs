@@ -16,11 +16,14 @@ namespace RLHerrera.Data.Mappings
             
             builder.Property(p => p.Descricao)
                 .IsRequired()
-                .HasColumnName("varchar(1000)");
+                .HasColumnType("varchar(1000)");
             
             builder.Property(p => p.Imagem)
                 .IsRequired()
-                .HasColumnName("varchar(100)");
+                .HasColumnType("varchar(100)");
+
+            builder.Property(p => p.Valor)
+                .HasColumnType("decimal(10,2)");
 
             builder.ToTable("Produtos");
         }

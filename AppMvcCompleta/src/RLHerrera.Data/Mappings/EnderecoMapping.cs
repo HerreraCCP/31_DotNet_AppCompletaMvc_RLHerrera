@@ -13,11 +13,11 @@ namespace RLHerrera.Data.Mappings
 
             builder.Property(c => c.Logradouro)
                 .IsRequired()
-                .HasColumnType("varchar(200");
+                .HasColumnType("varchar(200)");
 
             builder.Property(c => c.Numero)
                 .IsRequired()
-                .HasColumnType("varchar(50");
+                .HasColumnType("varchar(50)");
 
             builder.Property(c => c.Cep)
                 .IsRequired()
@@ -29,7 +29,7 @@ namespace RLHerrera.Data.Mappings
 
             builder.Property(c => c.Cidade)
                 .IsRequired()
-                .HasColumnType("varchar(100");
+                .HasColumnType("varchar(100)");
 
             builder.Property(c => c.Estado)
                 .IsRequired()
