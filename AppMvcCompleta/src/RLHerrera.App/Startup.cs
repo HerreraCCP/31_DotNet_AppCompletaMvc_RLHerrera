@@ -46,6 +46,8 @@ namespace RLHerrera.App
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+
+            services.AddAutoMapper(typeof(Startup));
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -74,6 +76,7 @@ namespace RLHerrera.App
             {
                 endpoints.MapRazorPages();
             });
+            
         }
     }
 }
