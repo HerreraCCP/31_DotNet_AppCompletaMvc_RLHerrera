@@ -13,7 +13,6 @@ namespace RLHerrera.App.Data
             : base(options)
         {
         }
-        public DbSet<RLHerrera.App.ViewModels.FornecedorViewModel> FornecedorViewModel { get; set; }
-        public DbSet<RLHerrera.App.ViewModels.ProdutoViewModel> ProdutoViewModel { get; set; }
+        public DbSet<RLHerrera.App.ViewModels.EnderecoViewModel> EnderecoViewModel { get; set; }
     }
 }

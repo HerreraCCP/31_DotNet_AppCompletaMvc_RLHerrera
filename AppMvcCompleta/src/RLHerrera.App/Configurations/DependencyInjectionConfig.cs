@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using RLHerrera.Business.Interfaces;
 using RLHerrera.Data.Context;
 using RLHerrera.Data.Repository;

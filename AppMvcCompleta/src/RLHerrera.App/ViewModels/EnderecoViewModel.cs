@@ -1,7 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using RLHerrera.Business.Models;
 
 namespace RLHerrera.App.ViewModels
 {

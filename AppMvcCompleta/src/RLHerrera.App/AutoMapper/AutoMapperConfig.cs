@@ -9,8 +9,8 @@ namespace RLHerrera.App.AutoMapper
         public AutoMapperConfig()
         {
             CreateMap<Fornecedor, FornecedorViewModel>().ReverseMap();
-            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
+            CreateMap<Produto, ProdutoViewModel>().ReverseMap();
         }
     }
 }

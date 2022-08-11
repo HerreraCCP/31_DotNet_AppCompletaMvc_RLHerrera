@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using RLHerrera.App.ViewModels;
 using RLHerrera.Business.Interfaces;
-using RLHerrera.Business.Models;
+using RLHerrera.App.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -39,7 +38,7 @@ namespace RLHerrera.App.Controllers
         public async Task<IActionResult> Create(FornecedorViewModel fornecedorViewModel)
         {
             if (!ModelState.IsValid) return View(fornecedorViewModel);
-            var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
+            var fornecedor = _mapper.Map<Business.Models.Fornecedor>(fornecedorViewModel);
             await _fornecedorRepository.Adicionar(fornecedor);
             return RedirectToAction("Index");
         }
@@ -58,7 +57,7 @@ namespace RLHerrera.App.Controllers
             if (id != fornecedorViewModel.Id) return NotFound();
             if (!ModelState.IsValid) return View(fornecedorViewModel);
 
-            var fornecedor = _mapper.Map<Fornecedor>(fornecedorViewModel);
+            var fornecedor = _mapper.Map<Business.Models.Fornecedor>(fornecedorViewModel);
             await _fornecedorRepository.Atualizar(fornecedor);
 
             return RedirectToAction("Index");
