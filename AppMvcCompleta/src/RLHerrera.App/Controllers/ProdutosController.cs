@@ -65,9 +65,28 @@ namespace RLHerrera.App.Controllers
         public async Task<IActionResult> Edit(Guid id, ProdutoViewModel produtoViewModel)
         {
             if (id != produtoViewModel.Id) return NotFound();
+
+            var produtoUpdate = await ObterProduto(id);
+            produtoViewModel.Fornecedor = produtoUpdate.Fornecedor;
+            produtoViewModel.Imagem = produtoViewModel.Imagem;
+
             if (!ModelState.IsValid) return View(produtoViewModel);
 
-            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoViewModel));
+            if (produtoViewModel.ImagemUpload != null)
+            {
+                var prefixo = Guid.NewGuid() + "_";
+                if (!await UploadArquivo(produtoViewModel.ImagemUpload, prefixo))
+                    return View(produtoViewModel);
+
+                produtoUpdate.Imagem = prefixo + produtoViewModel.ImagemUpload.FileName;
+            }
+
+            produtoUpdate.Nome = produtoViewModel.Nome;
+            produtoUpdate.Descricao = produtoViewModel.Descricao;
+            produtoUpdate.Valor = produtoViewModel.Valor;
+            produtoUpdate.Ativo = produtoViewModel.Ativo;
+
+            await _produtoRepository.Atualizar(_mapper.Map<Produto>(produtoUpdate));
             return RedirectToAction("Index");
         }
 
@@ -108,10 +127,10 @@ namespace RLHerrera.App.Controllers
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", prefixo + arquivo.FileName);
 
-            if(System.IO.File.Exists(path))
+            if (System.IO.File.Exists(path))
             {
                 ModelState.AddModelError(String.Empty, "Ja existe um arquivo com este nome!");
-                return false;   
+                return false;
             }
 
             using var stream = new FileStream(path, FileMode.Create);
