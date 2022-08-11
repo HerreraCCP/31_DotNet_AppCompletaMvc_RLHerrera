@@ -10,14 +10,13 @@ namespace RLHerrera.Data.Repository
 {
     public class EnderecoRepository : Repository<Endereco>, IEnderecoRepository
     {
-        public EnderecoRepository(AppDbContext context) : base(context)
-        {
-        }
+        public EnderecoRepository(AppDbContext context) : base(context) { }
 
-        public async Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId) =>
-            await Db.Enderecos
+        public async Task<Endereco> ObterEnderecoPorFornecedor(Guid fornecedorId)
+        {
+            return await Db.Enderecos
                 .AsNoTracking()
-                .OrderBy(e => e.Fornecedor)
-                .FirstOrDefaultAsync(e => e.FornecedorId == fornecedorId);
+                .FirstOrDefaultAsync(f => f.FornecedorId == fornecedorId);
+        }
     }
 }

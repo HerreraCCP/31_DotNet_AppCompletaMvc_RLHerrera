@@ -50,7 +50,7 @@ namespace RLHerrera.Data.Repository
        
         public async Task<int> SaveChanges() 
             => await Db.SaveChangesAsync();
-        
+
         public void Dispose() => Db?.Dispose();
     }
 }

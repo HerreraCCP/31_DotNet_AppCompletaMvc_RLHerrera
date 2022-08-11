@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RLHerrera.App.ViewModels;
 
 namespace RLHerrera.App.Data
 {
@@ -12,5 +13,6 @@ namespace RLHerrera.App.Data
             : base(options)
         {
         }
+        public DbSet<RLHerrera.App.ViewModels.EnderecoViewModel> EnderecoViewModel { get; set; }
     }
 }
