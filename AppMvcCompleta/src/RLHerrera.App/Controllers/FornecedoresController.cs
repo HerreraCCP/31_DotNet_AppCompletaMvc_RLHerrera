@@ -88,9 +88,12 @@ namespace RLHerrera.App.Controllers
         private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)
             => _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorProdutosEndereco(id));
 
-        public IActionResult AtualizarEndereco()
+        public async Task<IActionResult> AtualizarEndereco(Guid id)
         {
-            throw new NotImplementedException();
+            var fornecedor = await ObterFornecedorEndereco(id);
+            if (fornecedor == null) return NotFound();
+
+            return PartialView("_AtualizarEndereco", new FornecedorViewModel { Endereco = fornecedor.Endereco });
         }
     }
 }
