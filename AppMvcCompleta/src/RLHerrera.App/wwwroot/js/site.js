@@ -43,7 +43,7 @@ function bindForm(dialog) {
 function BuscaCep() {
     $(document).ready(() => {
 
-        limpa_formulário_cep() => {
+        function limpa_formulário_cep() {
             // Limpa valores do formulário de cep.
             $("#Endereco_Logradouro").val("");
             $("#Endereco_Bairro").val("");

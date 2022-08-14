@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RLHerrera.App.Extensions;
 using RLHerrera.App.ViewModels;
 using RLHerrera.Business.Interfaces;
 using RLHerrera.Business.Models;
@@ -34,10 +35,7 @@ namespace RLHerrera.App.Controllers
 
         [AllowAnonymous]
         [Route("lista-de-produtos")]
-        public async Task<IActionResult> Index()
-        {
-            return View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
-        }
+        public async Task<IActionResult> Index() => View(_mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores()));
 
         [AllowAnonymous]
         [Route("dados-do-produto/{id:guid}")]
@@ -45,10 +43,7 @@ namespace RLHerrera.App.Controllers
         {
             var produtoViewModel = await ObterProduto(id);
 
-            if (produtoViewModel == null)
-            {
-                return NotFound();
-            }
+            if (produtoViewModel == null) return NotFound();
 
             return View(produtoViewModel);
         }
@@ -58,7 +53,6 @@ namespace RLHerrera.App.Controllers
         public async Task<IActionResult> Create()
         {
             var produtoViewModel = await PopularFornecedores(new ProdutoViewModel());
-
             return View(produtoViewModel);
         }
 
@@ -71,10 +65,7 @@ namespace RLHerrera.App.Controllers
             if (!ModelState.IsValid) return View(produtoViewModel);
 
             var imgPrefixo = Guid.NewGuid() + "_";
-            if (!await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo))
-            {
-                return View(produtoViewModel);
-            }
+            if (!await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo)) return View(produtoViewModel);
 
             produtoViewModel.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             await _produtoService.Adicionar(_mapper.Map<Produto>(produtoViewModel));
@@ -89,11 +80,7 @@ namespace RLHerrera.App.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var produtoViewModel = await ObterProduto(id);
-
-            if (produtoViewModel == null)
-            {
-                return NotFound();
-            }
+            if (produtoViewModel == null) return NotFound();
 
             return View(produtoViewModel);
         }
@@ -113,10 +100,7 @@ namespace RLHerrera.App.Controllers
             if (produtoViewModel.ImagemUpload != null)
             {
                 var imgPrefixo = Guid.NewGuid() + "_";
-                if (!await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo))
-                {
-                    return View(produtoViewModel);
-                }
+                if (!await UploadArquivo(produtoViewModel.ImagemUpload, imgPrefixo)) return View(produtoViewModel);
 
                 produtoAtualizacao.Imagem = imgPrefixo + produtoViewModel.ImagemUpload.FileName;
             }
@@ -138,11 +122,7 @@ namespace RLHerrera.App.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var produto = await ObterProduto(id);
-
-            if (produto == null)
-            {
-                return NotFound();
-            }
+            if (produto == null) return NotFound();
 
             return View(produto);
         }
@@ -154,15 +134,10 @@ namespace RLHerrera.App.Controllers
         {
             var produto = await ObterProduto(id);
 
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
+            if (produto == null) return NotFound();
             await _produtoService.Remover(id);
 
             if (!OperacaoValida()) return View(produto);
-
             TempData["Sucesso"] = "Produto excluido com sucesso!";
 
             return RedirectToAction("Index");

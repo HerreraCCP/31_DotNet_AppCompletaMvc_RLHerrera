@@ -36,7 +36,9 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Excluir" class="btn btn-danger" />
-        <a class="btn btn-info" asp-action="Index"><span class="fa fa-arrow-left"></span></a>
+        <a class="btn btn-info" asp-action="Index">
+            <span class="fa fa-arrow-left" aria-hidden="true"></span>
+        </a>
     </form>
 </div>
 

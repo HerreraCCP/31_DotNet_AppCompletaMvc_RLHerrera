@@ -8,7 +8,9 @@
 <hr />
 
 <form asp-action="Edit">
+
     <vc:Summary></vc:Summary>
+
     <input type="hidden" asp-for="Id" />
 
     <div class="form-row">
@@ -21,9 +23,11 @@
             <label asp-for="Documento"></label>
             <input asp-for="Documento" class="form-control" />
             <span asp-validation-for="Documento" class="text-danger"></span>
+
         </div>
 
         <div class="form-group col-md-6">
+
             <label asp-for="TipoFornecedor"></label>
             <div>
                 <input type="radio" value="1" asp-for="TipoFornecedor" checked="@(Model.TipoFornecedor == 1)" /> Pessoa Física
@@ -40,9 +44,9 @@
         </div>
     </div>
 
+
     <div class="form-group">
         <input type="submit" value="Salvar" class="btn btn-primary" />
-        <a class="btn btn-info" asp-action="Index"><span class="fa fa-arrow-left"></span></a>
     </div>
 </form>
 
@@ -70,8 +74,9 @@
     }
 
     <script>
-        $(document).ready(() => {
+        $(document).ready(function () {
             SetModal();
         });
     </script>
+
 }

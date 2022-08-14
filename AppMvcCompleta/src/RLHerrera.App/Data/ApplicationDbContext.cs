@@ -13,6 +13,5 @@ namespace RLHerrera.App.Data
             : base(options)
         {
         }
-        public DbSet<RLHerrera.App.ViewModels.EnderecoViewModel> EnderecoViewModel { get; set; }
     }
 }

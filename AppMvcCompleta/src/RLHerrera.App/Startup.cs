@@ -1,15 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RLHerrera.App.Configurations;
-using RLHerrera.App.Data;
-using RLHerrera.Business.Interfaces;
 using RLHerrera.Data.Context;
-using RLHerrera.Data.Repository;
 
 namespace RLHerrera.App
 {
@@ -25,10 +21,7 @@ namespace RLHerrera.App
                 .AddJsonFile($"appsettings.{hostEnvironment.EnvironmentName}.json", true, true)
                 .AddEnvironmentVariables();
 
-            if (hostEnvironment.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
+            if (hostEnvironment.IsDevelopment()) builder.AddUserSecrets<Startup>();
 
             Configuration = builder.Build();
         }
@@ -36,17 +29,12 @@ namespace RLHerrera.App
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration(Configuration);
-
-            services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(typeof(Startup));
-
             services.AddMvcConfiguration();
-
             services.ResolveDependencies();
         }
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

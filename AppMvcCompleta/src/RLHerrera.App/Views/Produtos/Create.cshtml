@@ -54,20 +54,19 @@
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />
                 <a class="btn btn-info" asp-action="Index">
-                    <span class="fa fa-arrow-left"></span>
+                    <span class="fa fa-arrow-left" aria-hidden="true"></span>
                 </a>
             </div>
         </form>
     </div>
 </div>
 
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        $("#ImagemUpload").change(() => {
+        $("#ImagemUpload").change(function () {
             $("#img_nome").text(this.files[0].name);
             $("#img_nome")[0].style.display = 'block';
         });
