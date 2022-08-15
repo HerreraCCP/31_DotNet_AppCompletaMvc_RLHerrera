@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using Microsoft.Extensions.DependencyInjection;
+using RLHerrera.App.Extensions;
 using RLHerrera.Business.Interfaces;
+using RLHerrera.Business.Notificacoes;
+using RLHerrera.Business.Services;
 using RLHerrera.Data.Context;
 using RLHerrera.Data.Repository;
 
@@ -13,11 +17,11 @@ namespace RLHerrera.App.Configurations
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-            //services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
+            services.AddScoped<IFornecedorService, FornecedorService>();
+            services.AddScoped<INotificador, Notificador>();
+            services.AddScoped<IProdutoService, ProdutoService>();
 
-            //services.AddScoped<INotificador, Notificador>();
-            //services.AddScoped<IFornecedorService, FornecedorService>();
-            //services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddSingleton<IValidationAttributeAdapterProvider, MoedaValidationAttributeAdapterProvider>();
 
             return services;
         }

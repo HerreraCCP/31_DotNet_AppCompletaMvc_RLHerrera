@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using RLHerrera.App.ViewModels;
-using System.Threading.Tasks;
 
 namespace RLHerrera.App.Controllers
 {
