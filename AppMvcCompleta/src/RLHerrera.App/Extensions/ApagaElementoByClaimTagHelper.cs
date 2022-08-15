@@ -11,10 +11,8 @@ namespace RLHerrera.App.Extensions
     {
         private readonly IHttpContextAccessor _contextAccessor;
 
-        public ApagaElementoTagHelper(IHttpContextAccessor contextAccessor)
-        {
-            _contextAccessor = contextAccessor;
-        }
+        public ApagaElementoTagHelper(IHttpContextAccessor contextAccessor) 
+            => _contextAccessor = contextAccessor;
 
         [HtmlAttributeName("supress-by-claim-name")]
         public string IdentityClaimName { get; set; }
@@ -52,10 +50,8 @@ namespace RLHerrera.App.Extensions
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            if (context == null)
-                throw new ArgumentNullException(nameof(context));
-            if (output == null)
-                throw new ArgumentNullException(nameof(output));
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (output == null) throw new ArgumentNullException(nameof(output));
 
             var action = _contextAccessor.HttpContext.GetRouteData().Values["action"].ToString();
 
